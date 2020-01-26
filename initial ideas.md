@@ -2,6 +2,8 @@
 
 ## Topics
 
+• 
+
 ## Format (duration, audience, frontal/exercises)
 
-## Workflow
+## Workflow (who covers what)

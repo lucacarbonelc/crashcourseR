@@ -1,8 +1,4 @@
----
-title: "Layout course"
-date: 26 January 2020
-output: html_document
----
+# Layout course
 
 ## Topics
 

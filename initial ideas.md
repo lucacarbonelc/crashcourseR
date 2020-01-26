@@ -4,4 +4,4 @@
 
 ## Format (duration, audience, frontal/exercises)
 
-## 
+## Workflow

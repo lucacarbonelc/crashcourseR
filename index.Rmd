@@ -2,7 +2,7 @@
 title: "Material"
 ---
 
-- [First Week]()
+- [First Week](first_week.html)
 - [Second Week]()
 - [Third Week]()
 - [Fourth Week]()

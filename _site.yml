@@ -1,8 +1,0 @@
-title: "Crash Course R"
-output_dir: "."
-output:
-  html_document:
-    theme: paper
-    css: 'styles.css'
-    toc: TRUE
-    toc_float: TRUE

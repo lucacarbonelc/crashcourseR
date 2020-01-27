@@ -7,3 +7,7 @@
 ## Format (duration, audience, frontal/exercises)
 
 ## Workflow (who covers what)
+
+## Exercises
+
+### Data: iris, 

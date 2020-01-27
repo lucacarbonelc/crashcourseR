@@ -2,23 +2,19 @@ output_dir: "."
 navbar:
   title: "Crash Course R"
   left:
-    - text: "Writing"
-      href: research.html
-    - text: "Speaking"
-      href: talks.html
-    - text: "Programming"
-      href: software.html
-    - text: "Teaching"
-      href: teaching.html
+    - text: "First week"
+      href: firstweek.html
+    - text: "Second week"
+      href: secondweek.html
+    - text: "Third week"
+      href: thirdweek.html
+    - text: "Fourth week"
+      href: fourthweek.html
   right:
     - icon: fa-envelope fa-lg
       href: contact.html
     - icon: fa-github fa-lg
-      href: http://github.com/zabore
-    - icon: fa-twitter fa-lg
-      href: https://twitter.com/zabormetrics
-    - icon: fa-linkedin fa-lg
-      href: https://www.linkedin.com/in/emily-zabor-59b902b7/
+      href: http://github.com/lucacarbonelc/crashcourseR
 output:
   html_document:
     theme: paper

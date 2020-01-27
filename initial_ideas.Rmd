@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Topics
 
-  [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR)
+|        <font size="5"> • [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR) </font>
 
 # Format (duration, audience, frontal/exercises)
 
@@ -24,4 +24,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Data:
 
-  iris
+|        <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
+  
+## Guides:
+
+|        <font size="5"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
+
+
+
+
+
+
+

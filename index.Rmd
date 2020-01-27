@@ -2,9 +2,9 @@
 title: "Material"
 ---
 
-- [Initial ideas](initial_ideas.html)
+- <font size="5"> [Initial ideas](initial_ideas.html) </font>
 
-- [First Week](first_week.html)
-- [Second Week]()
-- [Third Week]()
-- [Fourth Week]()
+- <font size="5"> [First Week](first_week.html) </font>
+- <font size="5"> [Second Week]() </font>
+- <font size="5"> [Third Week]() </font>
+- <font size="5"> [Fourth Week]() </font>

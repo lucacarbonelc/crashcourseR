@@ -1,20 +1,5 @@
+title: "Crash Course R"
 output_dir: "."
-navbar:
-  title: "Crash Course R"
-  left:
-    - text: "First week"
-      href: firstweek.html
-    - text: "Second week"
-      href: secondweek.html
-    - text: "Third week"
-      href: thirdweek.html
-    - text: "Fourth week"
-      href: fourthweek.html
-  right:
-    - icon: fa-envelope fa-lg
-      href: contact.html
-    - icon: fa-github fa-lg
-      href: http://github.com/lucacarbonelc/crashcourseR
 output:
   html_document:
     theme: paper

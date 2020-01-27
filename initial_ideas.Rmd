@@ -1,0 +1,27 @@
+---
+title: "Initial Ideas"
+author: "Luca Carbone"
+date: "1/27/2020"
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Topics
+
+  [R Basic ECPR 2018](https://github.com/albertostefanelli/r_basics_ecpr18)
+
+# Format (duration, audience, frontal/exercises)
+
+# Workflow (who covers what)
+
+# Exercises
+
+## Data:
+
+  iris

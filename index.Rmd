@@ -2,6 +2,8 @@
 title: "Material"
 ---
 
+- [Initial ideas](initial_ideas.html)
+
 - [First Week](first_week.html)
 - [Second Week]()
 - [Third Week]()

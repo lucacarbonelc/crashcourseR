@@ -14,7 +14,20 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Topics
 
-|        <font size="5"> • [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR) </font>
+### First week
+
+| <font size="5"> • [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR) </font>
+| • what, why, and intro to course
+| • install R and RStudio
+| • a word of encouragement and how to find help
+| • basic objects (vector, matrix, data frame, list, data types (numeric, character, logical, factors, missing values))
+| • operations with objects and indexing
+
+
+
+| • RMarkdown (citation, write a paper in R, embed analyses, ...)
+
+
 
 # Format (duration, audience, frontal/exercises)
 
@@ -24,11 +37,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Data:
 
-|        <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
+| <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
   
 # Guides:
 
-|        <font size="5"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
+| <font size="5"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
 
 
 

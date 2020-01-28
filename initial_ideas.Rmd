@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 |        <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
   
-# Guides:
+# Guides.:
 
 |        <font size="5"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
 

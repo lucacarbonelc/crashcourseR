@@ -21,17 +21,63 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-## First week
+## First week (Lu)
+
+| • install R and RStudio
+
+<br>
+
+### first session
 
 | • what, why, and intro to course
-| • install R and RStudio
 | • a word of encouragement and how to find help
+| • good coding
+| • practical matters: Rstudio environment, installing/loading packages
+| • simple calculations: storing, operators
+
+<br>
+
+### second session
+
 | • basic objects (vector, matrix, data frame, list, data types (numeric, character, logical, factors, missing values))
+| • descriptives: importing/exporting data, summarising
 | • operations with objects and indexing
 
 <br>
 
-| • RMarkdown (citation, write a paper in R, embed analyses, ...)  
+## Second week (Lu)
+
+| • wrangling: tidyverse, 
+| • loops, conditionals (if else, ifelse, while), function, apply family, 
+
+<br>
+
+## Third week (Le)
+
+| • loading/saving data (heaven/foreign package)
+| • GLM
+
+<br>
+
+## Fourth week (Se)
+
+| • SEM and structural plotting
+| • Missing data
+
+<br>
+
+## Fifth week (Lu)
+
+| • basic plotting
+| • ggplot
+| • plotly
+
+<br>
+
+## Sixth week (Se)
+
+| • RMarkdown (citation, write a paper in R, embed analyses, open science...) 
+| • additional questions
 
 <br>
 
@@ -39,25 +85,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-# Workflow (who covers what)
+## Session
+
+| • 20/30 mins theory and 20/30 mins practice x2
 
 <br>
 
-# Exercises
-
-<br>
-
-## Data:
+## Data
 
 | <font size="4"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
+| • individual contribution
 
 <br>
 
-# Guides:
+# Guides
 
-| <font size="4"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
+| <font size="4"> • [RMarkdown by Yihui Xie, J. J. Allaire & Garrett Grolemund](https://bookdown.org/yihui/rmarkdown/) </font>
+| <font size="4"> • [R course by Danielle Navarro](https://learningstatisticswithr.com) </font>
+| <font size="4"> • [R resources by Paul Vanderlaken](https://paulvanderlaken.com/2017/08/10/r-resources-cheatsheets-tutorials-books/) </font>
 
+<br>
 
+# TO DO
+
+| • online survey to ask what topics to include
 
 
 

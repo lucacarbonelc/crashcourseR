@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Exercises
 
-## Data:
+|   ## Data:
 
 |        <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
   

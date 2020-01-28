@@ -1,47 +1,61 @@
 ---
 title: "Initial Ideas"
 author: "Luca Carbone"
-date: "1/27/2020"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
     html_document:
         toc: TRUE
         toc_float: TRUE
+        number_sections: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<br>
+
 # Topics
 
-### First week
+| <font size="4"> • Ideas from: [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR) </font>
 
-| <font size="5"> • [R Basic ECPR 2018](https://github.com/aakosm/R_Basics_ECPR) </font>
+<br>
+
+## First week
+
 | • what, why, and intro to course
 | • install R and RStudio
 | • a word of encouragement and how to find help
 | • basic objects (vector, matrix, data frame, list, data types (numeric, character, logical, factors, missing values))
 | • operations with objects and indexing
 
+<br>
 
+| • RMarkdown (citation, write a paper in R, embed analyses, ...)  
 
-| • RMarkdown (citation, write a paper in R, embed analyses, ...)
-
-
+<br>
 
 # Format (duration, audience, frontal/exercises)
 
+<br>
+
 # Workflow (who covers what)
+
+<br>
 
 # Exercises
 
+<br>
+
 ## Data:
 
-| <font size="5"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
-  
+| <font size="4"> • [Iris](https://gist.github.com/curran/a08a1080b88344b0c8a7) </font>
+
+<br>
+
 # Guides:
 
-| <font size="5"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
+| <font size="4"> • [RMarkdown](https://bookdown.org/yihui/rmarkdown/) </font>
 
 
 

@@ -39,7 +39,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### second session
 
-| • basic objects (vector, matrix, data frame, list, data types (numeric, character, logical, factors, missing values))
+| • basic objects: vector, matrix, data frame, list, data types (numeric, character, logical, factors, missing values)
 | • descriptives: importing/exporting data, summarising
 | • operations with objects and indexing
 
@@ -48,7 +48,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Second week (Lu)
 
 | • wrangling: tidyverse, 
-| • loops, conditionals (if else, ifelse, while), function, apply family, 
+| • loops, conditionals (if else, ifelse, while), function, apply family
 
 <br>
 
@@ -76,7 +76,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Sixth week (Se)
 
-| • RMarkdown (citation, write a paper in R, embed analyses, open science...) 
+| • RMarkdown: citation, write a paper in R, embed analyses, open science (power analysis, reproducible simulations with use.seed())
 | • additional questions
 
 <br>
@@ -109,6 +109,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # TO DO
 
 | • online survey to ask what topics to include
+| • other topics to add: factor analysis, good practices for reproducibility (use set.seed(),)
 
 
 

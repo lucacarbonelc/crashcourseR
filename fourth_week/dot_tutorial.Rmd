@@ -1,0 +1,374 @@
+---
+title: "A short dot tutorial"
+author: "Sebastian Kurten (sebastian.kurten@kuleuven.be)"
+date: "23-1-2020"
+output: html_document
+---
+
+Dear colleagues,
+
+are you also conducting splendid research, but you are getting tired of drawing all your structural models by hand?
+If that is the case, the dot language might be something worth to consider.
+
+This tutorial tries to give you a quick introduction into the basic functioncs of dot like it is implemented in the `DiagrammeR` package in R.
+
+```{r setup, include=FALSE}
+
+library (DiagrammeR)
+library (DiagrammeRsvg)
+library (dplyr)
+library (rsvg)
+library (png)
+
+```
+
+## Getting started
+
+To get started with the package you just need to install and load the package.
+
+```{r setup show, eval = FALSE}
+
+install.packages("DiagrammeR")
+install.packages("DiagrammeRsvg")
+install.packages("rsvg")
+install.packages("png")
+
+library (DiagrammeR)
+library (DiagrammeRsvg)
+library (dplyr)
+library (rsvg)
+library (png)
+
+```
+
+Now you got it running. The first thing we want to do is to create a path diagram of a theoretical model we want to implement in a paper. The model assumes that we have got four independent indicators that are mediated by a bunch of latent factors which influence another manifest dependent variable.
+
+## Start drawing
+
+Let's start drawing the independent variables. We will use the `grViz` function to create a digraph. 
+
+```{r independent variables, echo=TRUE}
+
+my_graph <- grViz("
+digraph {
+  '1' [label = 'Instagram', shape = 'square'] 
+  '2' [label = 'Snapchat', shape = 'square'] 
+  '3' [label = 'Facebook', shape = 'square'] 
+  '4' [label = 'WhatsApp', shape = 'square']
+  }")
+
+my_graph
+
+```
+
+Okay. That was easy. Now we have four nodes (1,2,3 and 4) which all have the shape of squares and are labeled: Instagram, Snapchat, Facebook and WhatsApp. There are other labels and other shapes possible. We will play around with that later. Now we are going to add all other variables, that are needed for our model. We will draw the manifested variables as squares and the latent variables as circles
+
+```{r rest of the variables, echo=TRUE}
+
+my_graph <- grViz("
+digraph {
+  '1' [label = 'Instagram', shape = 'square'] 
+  '2' [label = 'Snapchat', shape = 'square'] 
+  '3' [label = 'Facebook', shape = 'square'] 
+  '4' [label = 'WhatsApp', shape = 'square']
+  '5' [label = 'Similarity', shape = 'circle']
+  '6' [label = 'Desirability', shape = 'circle']
+  '7' [label = 'Realism', shape = 'circle']
+  '8' [label = 'Identification', shape = 'circle']
+  '9' [label = 'Expectation', shape = 'circle']
+  '10'[label = 'Drinking', shape = 'square']
+  }")
+
+my_graph
+
+```
+
+Okay now we have a bunch of objects representing our variables. That is good. We will now start to draw edges to connect the nodes with each other. The edges are the product of theoretical considerations which are not important now.
+
+```{r including edges, echo=TRUE}
+
+my_graph <- grViz("
+digraph {
+  '1' [label = 'Instagram', shape = 'square'] 
+  '2' [label = 'Snapchat', shape = 'square'] 
+  '3' [label = 'Facebook', shape = 'square'] 
+  '4' [label = 'WhatsApp', shape = 'square']
+  '5' [label = 'Similarity', shape = 'circle']
+  '6' [label = 'Desirability', shape = 'circle']
+  '7' [label = 'Realism', shape = 'circle']
+  '8' [label = 'Identification', shape = 'circle']
+  '9' [label = 'Expectation', shape = 'circle']
+  '10'[label = 'Drinking', shape = 'square']
+  
+  '3'->'5' [style = 'solid']
+  '1'->'5' [style = 'solid']
+  '2'->'5' [style = 'solid']
+  '4'->'5' [style = 'solid']
+  '3'->'6' [style = 'solid']
+  '1'->'6' [style = 'solid']
+  '2'->'6' [style = 'solid']
+  '4'->'6' [style = 'solid']
+  '3'->'7' [style = 'solid']
+  '1'->'7' [style = 'solid']
+  '2'->'7' [style = 'solid']
+  '4'->'7' [style = 'solid']
+  '5'->'8' [style = 'solid']
+  '6'->'8' [style = 'solid']
+  '7'->'8' [style = 'solid']
+  '8'->'9' [style = 'solid']
+  '9'->'10' [style = 'solid']
+
+}")
+
+my_graph
+
+```
+
+We have defined solid arrows which usually represents some regression like relationship between the variables. The graph looks quite fine now, but we want to have it going from the left to the right (rankdir=LR) and we want to set the shapes to the same sizes. Also we want to change the font type and size. Therefore, we apply some changes:
+
+```{r formatting the graph, echo=TRUE}
+
+my_graph <- grViz("
+digraph {
+
+  graph [rankdir=LR]
+  
+  node [fontname = 'Helvetica',
+      fontsize = '16']
+  
+  edge [fontname = 'Helvetica',
+     arrowsize = '0.5']
+
+  '1' [label = 'Instagram', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '2' [label = 'Snapchat', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '3' [label = 'Facebook', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '4' [label = 'WhatsApp', shape = 'square', fixedsize = true, width = 1.2, height = 1.2]
+  '5' [label = 'Similarity', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '6' [label = 'Desirability', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '7' [label = 'Realism', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '8' [label = 'Identification', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '9' [label = 'Expectation', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '10'[label = 'Drinking', shape = 'square', fixedsize = true, width = 1.2, height = 1.2]
+  
+  '3'->'5' [style = 'solid']
+  '1'->'5' [style = 'solid']
+  '2'->'5' [style = 'solid']
+  '4'->'5' [style = 'solid']
+  '3'->'6' [style = 'solid']
+  '1'->'6' [style = 'solid']
+  '2'->'6' [style = 'solid']
+  '4'->'6' [style = 'solid']
+  '3'->'7' [style = 'solid']
+  '1'->'7' [style = 'solid']
+  '2'->'7' [style = 'solid']
+  '4'->'7' [style = 'solid']
+  '5'->'8' [style = 'solid']
+  '6'->'8' [style = 'solid']
+  '7'->'8' [style = 'solid']
+  '8'->'9' [style = 'solid']
+  '9'->'10' [style = 'solid']
+
+}")
+
+my_graph
+
+```
+
+That looks already quite fine. But the dot language is capable of drawing much more complex relationships in structural graphs. For example we can label the arrows (or in other words: edges) to show certain values. As an example we will extend the relationships in our hypothetical model with some hypotheses about positive and negative relationships. We will also increase the size of the edge font.
+
+```{r, adding edge labels, echo=TRUE}
+
+my_graph <- grViz("
+digraph {
+
+  graph [rankdir=LR]
+  
+  node [fontname = 'Helvetica',
+      fontsize = '16']
+  
+  edge [fontname = 'Helvetica',
+     arrowsize = '0.5',
+     fontsize = 20]
+
+  '1' [label = 'Instagram', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '2' [label = 'Snapchat', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '3' [label = 'Facebook', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '4' [label = 'WhatsApp', shape = 'square', fixedsize = true, width = 1.2, height = 1.2]
+  '5' [label = 'Similarity', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '6' [label = 'Desirability', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '7' [label = 'Realism', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '8' [label = 'Identification', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '9' [label = 'Expectation', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5]
+  '10'[label = 'Drinking', shape = 'square', fixedsize = true, width = 1.2, height = 1.2]
+  
+  '3'->'5' [style = 'solid']
+  '1'->'5' [style = 'solid']
+  '2'->'5' [style = 'solid']
+  '4'->'5' [style = 'solid']
+  '3'->'6' [style = 'solid']
+  '1'->'6' [style = 'solid']
+  '2'->'6' [style = 'solid']
+  '4'->'6' [style = 'solid']
+  '3'->'7' [style = 'solid']
+  '1'->'7' [style = 'solid']
+  '2'->'7' [style = 'solid']
+  '4'->'7' [style = 'solid']
+  '5'->'8' [style = 'solid', label = '+']
+  '6'->'8' [style = 'solid', label = '+']
+  '7'->'8' [style = 'solid', label = '-']
+  '8'->'9' [style = 'solid']
+  '9'->'10' [style = 'solid']
+
+}")
+
+my_graph
+
+```
+
+Now sky is the limit for our graphs. By using the dot language it will be very easy in the future to adept our graph to a certain font type or a certain output size for journals or presentations. The last thing we need to do is writing our graph automatically into a file.
+
+```{r saving the graph, eval = FALSE, echo=TRUE}
+
+export_svg(theoretical_model) %>%
+  charToRaw() %>%
+  rsvg() %>%
+  png::writePNG("I:\\Your_Path\\my_graph.png")
+
+```
+
+If you have dificulties to find out what your path is, you can also use the `file.choose()` function. Just type it into your console and a window will pop up. Just select a file in the path you want to save your graph to and copy + paste the path of the resulting output.
+
+If the path is specified correctly, the file should be saved there directly. Saving via the output viewer of RStudio is not recommended.
+
+That were some easy steps to use the dot language within your research project. Maybe it helps. To give you another short impression how you could use it to display structural equation models or confirmatory factor analysis, I will provide you with some examples.
+
+## Some Examples
+
+This code creates a measurement model for some of the variables which were just used.
+
+```{r Measurement model, echo=TRUE}
+
+grViz("
+digraph {
+  graph [ranksep = 1
+  rankdir=LR]  
+  
+node [fontname = 'Helvetica',
+      fontsize = '14']
+  
+edge [fontname = 'Helvetica',
+     fontsize = '16'
+     arrowsize = '0.5']
+  
+  
+  '1' [label = 'Similarity', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5, fontsize = '16']
+  '2' [label = 'Desirability', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5, fontsize = '16'] 
+  '3' [label = 'Realism', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5, fontsize = '16'] 
+  '4' [label = 'Identification', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5, fontsize = '16'] 
+  
+  '8' [label = 'Doing the same things', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '9' [label = 'Being similar', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '10' [label = 'Peers do similar things', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '11' [label = 'Attractiveness', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '12' [label = 'Pleasure', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '13' [label = 'Happiness', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '14' [label = 'Do things like everyone else', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '15' [label = 'Behave like everyone else', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '16' [label = 'Want to do things like them', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+  '17' [label = 'Want to be more like them', shape = 'box', fixedsize = true, width = 2.5, height = .8] 
+
+  
+  '1'->'8' [label = '0.89'] 
+  '1'->'9' [label = '0.85'] 
+  '1'->'10' [label = '0.58'] 
+  '2'->'11' [label = '0.51'] 
+  '2'->'12' [label = '0.75'] 
+  '2'->'13' [label = '0.70'] 
+  '3'->'14' [label = '0.72'] 
+  '3'->'15' [label = '0.77'] 
+  '4'->'16' [label = '0.77'] 
+  '4'->'17' [label = '0.73'] 
+  
+  'e2' -> '8'
+  'e2' [label = '', shape = 'plaintext'] 
+  'e3' -> '9'
+  'e3' [label = '', shape = 'plaintext'] 
+  'e4' -> '10'
+  'e4' [label = '', shape = 'plaintext'] 
+  'e5' -> '11'
+  'e5' [label = '', shape = 'plaintext'] 
+  'e6' -> '12'
+  'e6' [label = '', shape = 'plaintext'] 
+  'e7' -> '13'
+  'e7' [label = '', shape = 'plaintext'] 
+  'e8' -> '14'
+  'e8' [label = '', shape = 'plaintext'] 
+  'e9' -> '15'
+  'e9' [label = '', shape = 'plaintext'] 
+  'e10' -> '16'
+  'e10' [label = '', shape = 'plaintext'] 
+  'e11' -> '17'
+  'e11' [label = '', shape = 'plaintext'] 
+
+   { rank = same;  8; 9; 10; 11; 12; 13; 14; 15; 16; 17 }
+   { rank = same; 1; 2; 3; 4}
+   { rank = max; e2; e3; e4; e5; e6; e7; e8; e9; e10; e11}
+
+}
+")
+
+```
+
+Another application can be structural equation modelling. The measurement models within the SEM were excluded to faciliate the interpretation. The code below shows such an application:
+
+``` {r example SEM, echo = TRUE }
+
+grViz("
+digraph {
+  graph [ranksep = 1
+  rankdir=LR]
+
+node [fontname = 'Helvetica',
+      fontsize = '16']
+  
+edge [fontname = 'Helvetica',
+     fontsize = '16'
+     arrowsize = '0.5']
+
+  { rank = same; 24; 25; 26; 27 }
+  
+  '1' [label = 'Similarity', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5] 
+  '2' [label = 'Desirability', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5] 
+  '3' [label = 'Realism', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5] 
+  '4' [label = 'Identification', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5] 
+  '5' [label = 'Expectation', shape = 'circle', fixedsize = true, width = 1.5, height = 1.5] 
+  '6' [label = 'Drinking', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '24' [label = 'Instagram', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '25' [label = 'Snapchat', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '26' [label = 'Facebook', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '27' [label = 'WhatsApp', shape = 'square', fixedsize = true, width = 1.2, height = 1.2] 
+  '1'->'4' [label = '0.61'] 
+  '2'->'4' [label = '0.36'] 
+  '3'->'4' [label = '-0.14'] 
+  '4'->'5' [label = '0.54'] 
+  '5'->'6' [label = '0.24'] 
+  '24'->'6' [label = '0.43'] 
+  '25'->'6' [label = '0.04'] 
+  '26'->'6' [label = '0.15'] 
+  '27'->'6' [label = '0.10'] 
+  '24'->'1' [label = '0.38'] 
+  '25'->'1' [label = '0.04'] 
+  '26'->'1' [label = '0.17'] 
+  '27'->'1' [label = '0.18'] 
+  '24'->'2' [label = '0.24'] 
+  '25'->'2' [label = '0.01'] 
+  '26'->'2' [label = '0.08'] 
+  '27'->'2' [label = '0.20'] 
+  '24'->'3' [label = '0.15'] 
+  '25'->'3' [label = '0.03'] 
+  '26'->'3' [label = '0.13'] 
+  '27'->'3' [label = '0.12'] 
+}
+")
+
+```

@@ -1,32 +1,115 @@
 ---
 title: "First Week"
 author: "Luca Carbone"
+date: "`r format(Sys.time(), '%d %B %Y')`"
 output: 
     html_document:
         toc: TRUE
         toc_float: TRUE
+        number_sections: true
+header-includes:
+    - \usepackage{setspace}\singlespacing
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+<style type="text/css">
 
-## R Markdown
+body{ /* Normal  */
+      font-size: 18px;
+  }
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+</style>
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+<br>
 
-```{r cars}
-summary(cars)
-```
+# Welcome to the R Crash Course!
 
-## Including Plots
+<center>
 
-You can also embed plots, for example:
+![](images/welcome.gif){ width=1000% height=1000%}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+</center>
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+R is an open source programming language, extremely versatile and increasingly used in academia and industry for data analysis. Together with RMarkdown, RStudio can be employed to build personal [websites](https://www.amyorben.com) or pages (like this one!).
+
+<br>
+
+R is good for several reasons:
+
+| • It's open source (you can always check what happens under the hood);
+| • New methods are continuously implemented;
+| • Great R community (developers and users) online, where to always find (or ask for) help. For example, [StackOverFlow](https://stackoverflow.com);
+| • Optimal for open science: clear syntax that makes easy to replicate results;
+| • It's free.
+
+<br>
+
+# Overview
+
+In these weeks, we will cover the following topics:
+
+| <span style="color:black">First week ()</span>
+|   1. Install [R](https://www.freestatistics.org/cran/) and [RStudio](https://rstudio.com/products/rstudio/download/);
+|   2. Install/load packages;
+|   3. Simple calculations;
+|   4. Basic objects: vector, matrix, data frame, list, data types;
+|   5. Descriptives: importing/exporting data, summarising;
+|   6. Operations with objects and indexing.
+
+<br>
+
+| <span style="color:black">Second week ()</span>
+|    1. Wrangling - tidyverse;
+|    2. Loops, conditionals (if else, ifelse, while), function, apply family.
+
+<br>
+
+| <span style="color:black">Third week ()</span>
+|    1. Loading/saving data (heaven/foreign package);
+|    2. GLM.
+
+<br>
+
+| <span style="color:black">Fourth week:</span>
+|    1. SEM and structural plotting;
+|    2. Missing data.
+
+<br>
+
+| <span style="color:black">Fifth week:</span>
+|    1. Basic plotting;
+|    2. ggplot.
+
+<br>
+
+| <span style="color:black">Sixth week:</span>
+|    1. RMarkdown: citation, write a paper in R, embed analyses, open science (power analysis, use.seed());
+|    2. Additional questions.
+
+<br>
+
+# Install R and RStudio
+
+> Additional info can be found on the [RStudio IDE Cheat Sheet](https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+
+<br>
+
+<center>
+
+This is R
+
+![](images/R.png)
+
+This is RStudio
+
+![](images/RStudio.png)
+
+</center>
+
+
+
+
+
+
+
+
+

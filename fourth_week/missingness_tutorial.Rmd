@@ -1,0 +1,165 @@
+---
+title: "A short introduction to dealing with missing data"
+author: "Sebastian Kurten (sebastian.kurten@kuleuven.be)"
+date: "24-1-2020"
+output: html_document
+---
+
+Missing data is a serious issue in research. It can influence the validity of your work substantially. Therefore, it is recommended to consult the specific literature.
+
+There are three basic concepts for missing data. Either data is missing completly at random (MCAR), at random (MAR) or not at random (MNAR). MCAR implies that there is no relationship between the missing data and the data you collected. That would be fine and we could just delete these cases. MAR assumes that the missing data can be explained by the data you collected. E.g. older people do not report their income. MNAR assumes that the missing data is related to unknown parameters, which are not in the data. By definition a researcher can hardly know whether his data is MAR or MNAR, because to check that he or she would need to have additional knowledge about the sample. MCAR is usually a keen assumption because that would mean that there is no correlation between missing data within the questionnair. 
+
+## Check for missings
+
+Before starting with the actual analysis, we need to import our data and load the required packages. We will use a snippet from a dataset from a survey that the Catholic University of Applied Science in Northrine-Westfalia conducted. Social Workers in public child protection were questionned about their workplace. In order to find the pathway of your saved data, you can always use the `file.choose` function.
+
+```{r setup, echo=TRUE, include=FALSE}
+
+library (foreign)
+library (dplyr)
+library (BaylorEdPsych)
+library (mvnmle)
+library (Hmisc)
+library (mice)
+
+data <- read.spss ("I:\\R_Tutorials\\Basti_thesis_data_snippet.sav", to.data.frame = TRUE, use.value.labels = FALSE)
+
+```
+
+A trick to get the exact location for your file is to use the command `file.choose ()`. After running it, a window will pop up. You can then select your file and you will receive the path as an output.
+
+As a first approach to an analysis of missingness within the data, it makes sense to check the amount of missings for every variable. In order to do so, we will first define a function which shows the amount of missings for every variable. The function will do it, by dividing the sum of missings by the number of observations (simple proportion). Then we will apply this function to our whole dataset and transpose it. Transposing means that we turn it, to increase readability. Afterwards we sort the missings in another dataframe to see the variables with the highest amount of missings directly.
+
+```{r, checking for missings, echo=TRUE}
+
+missings <- function(x) {
+  sum(is.na(x))/length(x)
+}
+
+dim (data)
+
+prop_missing <- as.data.frame(t(apply(data, 2, missings)))
+highest_prop_missing <- tail(sort(prop_missing))
+
+highest_prop_missing
+```
+
+We see that there are 100 observations of 37 variables in the dataset. Many of them do not have any missings. Or they have either 1 % like `wkap1_33` or 2 % like `TF1_49`. This can be considered low. Only `age_214` and `income_223` have a more substantial amount of missings (7 % and 10 %).
+
+When regarding missing data, it is important to investigate if there are non-random patterns which cause missingness. So, it should be checked whether there are correlations between missing data. One possible way to do so, is to recode your dataset using a binary coding for whether the data are missing or not. We will do that in the following code-chunk.
+
+The first step is to program two functions which will replace NAs with 0 and afterwards values which are unequal to zero with ones. We will use the `apply` function to apply it to the whole dataset.
+
+```{r, binary recoding, echo=TRUE}
+
+replace_NA_with_0 <- function(x) {
+  ifelse(is.na (x),  0, x)
+}
+
+replace_values_with_1 <- function(x) {
+  ifelse(x!=0,  1, x)
+}
+
+data_missing_binary <- data
+
+data_missing_binary <- as.data.frame(apply(data_missing_binary, 2, replace_NA_with_0))
+data_missing_binary <- as.data.frame(apply(data_missing_binary, 2, replace_values_with_1))
+
+```
+
+We obtained a dataframe which indicates now whether a value is missing (==0) or whether it is present (==1). In order to check for non-random patterns we will run a correlation analysis now. The `rcorr` function will produce a list with three vectors: `r` represents the strength of the correlation or in other words the correlation coefficient `n` the number of available observations and `p` refers to the significance of the correlation.
+
+```  {r, correlation analysis, echo=TRUE}
+
+missing_corr <-  rcorr(as.matrix(data_missing_binary))
+
+```
+
+If we now want to inspect the elements of the correlation matrix we could do so by for example using the command `missing_corr$r` or `missing_corr$p`. But if you try it out, you will notice that it is actually getting really messy. Therefore, we want to flatten our correlation matrix to make it more readable. We will also delete insignificant correlations from it.
+
+``` {r, flatten corr matrix, echo=TRUE}
+
+#This function was taken from this website: http://www.sthda.com/english/wiki/correlation-matrix-formatting-and-visualization
+
+flattenCorrMatrix <- function(cormat, pmat) {
+  ut <- upper.tri(cormat)
+  data.frame(
+    row = rownames(cormat)[row(cormat)[ut]],
+    column = rownames(cormat)[col(cormat)[ut]],
+    cor  =(cormat)[ut],
+    p = pmat[ut]
+    )
+}
+
+#creates a new flatted matrix, which r and p of the correlations
+flat_missing_corr <- flattenCorrMatrix(missing_corr$r, missing_corr$P)
+
+#deletes the correlations below .05 from the matrix
+flat_missing_corr <- flat_missing_corr[(flat_missing_corr$p<=.05),]
+
+#shows only complete cases for the matrix
+flat_missing_corr <- flat_missing_corr[complete.cases(flat_missing_corr),]
+
+flat_missing_corr
+
+```
+
+The matrix shows the correlation between the missings. What we are intersted in, is to see if the variables regarding age and income are correlated with other variables of our dataset. To see them we can just apply `view (flat_missing_corr)` and sort them in the viewer pane. We see that people who do not answer on the TF scale are also likely to not indicate their age and their income. The reasons for that are subject to further interpretation and investigation. What is interesting is the fact, that age and income are not correlated with each other. So, people usually answer at least one of the two questions.
+
+We could for example now check what makes a respondent not report age or gender. Therefore, we use the developed recode functions and only apply it to the two variables with high missings. Afterwards we will repeat the correlation analysis again. But we will also subset it to only obtain correlations of age and income.
+
+``` {r, predictors missigness, echo = TRUE}
+
+data_pred_na <- data
+
+data_pred_na$age_214 <- replace_NA_with_0(data_pred_na$age_214)
+data_pred_na$age_214 <- replace_values_with_1(data_pred_na$age_214)
+data_pred_na$income_223 <- replace_NA_with_0(data_pred_na$income_223)
+data_pred_na$income_223 <- replace_values_with_1(data_pred_na$income_223)
+
+pred_na_corr <-  rcorr(as.matrix(data_pred_na))
+
+flat_pred_na_corr <- flattenCorrMatrix(pred_na_corr$r, pred_na_corr$P)
+
+#deletes the correlations below .05 from the matrix
+flat_pred_na_corr <- flat_pred_na_corr[(flat_pred_na_corr$p<=.05),]
+
+#shows only complete cases for the matrix
+flat_pred_na_corr <- flat_pred_na_corr[complete.cases(flat_pred_na_corr),]
+
+#subset it
+flat_pred_na_corr_sub <- subset (flat_pred_na_corr, row == "age_214" | row =="income_223" | column == "age_214" | column == "income_223")
+
+flat_pred_na_corr_sub
+```
+
+The object `flat_pred_na_corr_sub` (sorry for the long name) should now contain all the significant correlations that are associated with the variables `age_214` and `income_223`. That means that we have some abilities to explain the missings in our dataset by the present variables. If we can do that, we have proven the assumptions of MAR. To check if we can predict them we will run a multiple imputation (MI) and check for the results. A good MI should be accompanied by a theoretical approach which explains why the variables are correlated.
+
+## Multiple Imputation
+
+For our MI we will actually use 5 imputations with 10 iterations each. We use the `pmm` method (predictive mean matching). See the documentation for alternative approaches. 
+
+```{r multiple imputation display, echo=TRUE, eval=FALSE}
+
+input_data_mi <- mice(data, m=5, maxit=10, meth="pmm", seed=500, pred = quickpred(data)) 
+
+```
+
+```{r multiple imputation run, include=FALSE}
+
+input_data_mi <- mice(data, m=5, maxit=10, meth="pmm", seed=500, pred = quickpred(data))
+
+```
+
+``` {r, densityplots}
+
+densityplot(input_data_mi)
+
+#complete the data
+data_mi <- complete (input_data_mi)
+
+```
+
+In the plot we see a blue distribution function. This function represents the actual distribution of the variable within our sample. The red lines are the Imputations. In a perfect world, it would match exactly with the blue ones. We see that it is not ideal in our case. There are a lots of potential reasons for a misfit. We saw that the predictors are not that strong. Another downside could be the relativ small sample size of 100.
+
+We are finally there. If you take a look at `data_mi` you will see that we now have a complete dataset. We estimated the missing values based on the present values. Now, we can use the dataset for any future analysis.

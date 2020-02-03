@@ -1,0 +1,121 @@
+---
+title: "First Week"
+author: "Luca Carbone"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+    html_document:
+        number_sections: TRUE
+        toc: true
+        toc_float: true
+        toc_depth: 4
+        theme: flatly
+        highlight: tango
+        df_print: paged
+---
+
+<br>
+
+# Welcome to the R Crash Course!
+
+<center>
+
+![](../images/welcome.gif){ width=1000% height=1000%}
+
+</center>
+
+R is an open source programming language, extremely versatile and increasingly used in academia and industry for data analysis. Together with RMarkdown, RStudio can be employed to build personal [websites](https://www.amyorben.com) or pages (like this one!).
+
+R is good for several reasons:
+
+* It's open source (you can always check what happens under the hood);
+* New methods are continuously implemented;
+* Great R community (developers and users) online, where to always find (or ask for) help. For example, [StackOverFlow](https://stackoverflow.com) and [R-bloggers](https://www.r-bloggers.com);
+* Optimal for open science: clear syntax that makes easy to replicate results;
+* It's free.
+
+<br>
+
+# Overview
+
+In these weeks, we will cover the following topics:
+
+* **<span style="color:black">First week ()</span>**
+  + 1. Setting up [R](https://www.freestatistics.org/cran/) and   [RStudio](https://rstudio.com/products/rstudio/download/);
+  + 1. Basic objects: vector, matrix, data frame, list, data types;
+  + 1. Simple calculations;
+  + 2. Descriptives: importing/exporting data, summarising;
+  + 2. Operations with objects and indexing.
+
+\newline
+
+* **<span style="color:black">Second week ()</span>**
+  + 1. Wrangling - tidyverse;
+  + 2. Loops, conditionals (if else, ifelse, while), function, apply family.
+
+\newline
+
+* **<span style="color:black">Third week ()</span>**
+  + 1. Loading/saving data (heaven/foreign package);
+  + 2. GLM.
+  
+\newline
+
+* **<span style="color:black">Fourth week ()</span>**
+  + 1. SEM and structural plotting;
+  + 2. Missing data.
+
+\newline
+
+* **<span style="color:black">Fifth week ()</span>**
+  + 1. Basic plotting;
+  + 2. ggplot.
+  
+\newline
+
+* **<span style="color:black">Sixth week ()</span>**
+  + 1. RMarkdown: citation, write a paper in R, open science;
+  + 2. Additional questions.
+
+Before we start, let's talk about programming. Everyone can code, you don't need a degree in computer science to do cool (and also advanced) stuff. Of course it is challenging, especially at the beginning. But the learning curve is steep, and very rewarding. So don't panic if you can get your head around R at the beginning, because it is very common also for experienced programmers to forget easy functions. Fortunately, the R community is very active and helpful. A Google search, most of the times, solves easy and more complex problems.
+
+
+
+<br>
+
+# Setting up R and RStudio
+
+> Additional info can be found on the [RStudio IDE Cheat Sheet](https://rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+
+Once R and RStudio are installed, the main program you will directly work with will be RStudio, which executes R in background. The setting is composed by four panels:
+
+* **The source code** - where you write your syntax;
+* **The interactive console** - where results are displayed and the syntax runs;
+* **The graphics layout** - where graphics and plots are displayed, together with help documents;
+* **The workspace** - where data are stored
+
+In order to perform certain types of operations and analyses, you will need to install and download packages. A package is a bundle of documents (code, data, documentation, and tests) written by someone to perform a specific type of operation and uploaded on CRAN (Comprehensive R Archive Network). In order to install a package, write in the syntax `install.packages("name.of.the.package)`. Packages are installed on your computer, which means that you only have to install them once (unless there are updates to download). In order to use the functions contained in the package, you have to load it in your R session with the command `library()`. When opening a new session, the package needs to be reloaded with the same command.
+
+A brief note about good coding practices. It's important to learn how to code properly, so that when your syntax is read by others, it's easy to read and fluent. A good companion throughout the first phases in which you'll find your way through code writing could be Hadley Wickham's [Style Guide](http://adv-r.had.co.nz/Style.html) and R-bloggers' [Best Practices](https://www.r-bloggers.com/r-code-best-practices/).
+
+<br>
+
+# Basic objects
+
+> The official "encyclopedia" of R terminology can be accessed on [CRAN](https://cran.r-project.org/doc/manuals/r-release/R-lang.html)
+
+R is a language with different types of objects - such as vector, matrix, data frame, and list - and different types of data - such as numeric, character, logical, and factors. An object can be considered as a specific configuration of data structure, a variable that can be assigned to an identifier. The `<-` symbol is used to assign objects to a certain identifier.
+
+* **Vector** - contiguous cells containing data, such as `c(1, 2, 3, 4)`. The function c stands for *concatenate*.
+
+```{r eval = FALSE}
+vector <- c(1, 2, 3, 4) # a vector of numbers
+starwars <- c("PrincessLeia", "Yoda", "HanSolo") # a vector of characters
+vector <- c(1, "DarthVader", 3, 4) # not a vector
+```
+
+* **Matrix** - 
+
+
+
+
+

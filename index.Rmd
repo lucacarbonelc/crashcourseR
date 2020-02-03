@@ -5,7 +5,7 @@ output: pdf_document
 
 - <font size="5"> [Initial ideas](initial_ideas.html) </font>
 
-- <font size="5"> [First Week](first_week/first_week.pdf) </font>
+- <font size="5"> [First Week](first_week/first_week.html) </font>
 - <font size="5"> [Second Week]() </font>
 - <font size="5"> [Third Week]() </font>
 - <font size="5"> [Fourth Week]() </font>

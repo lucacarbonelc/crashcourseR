@@ -2,7 +2,10 @@
 title: "First Week"
 author: "Luca Carbone"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-output: ioslides_presentation
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  slidy_presentation: default
 ---
 
 ```{r setup, include=FALSE}

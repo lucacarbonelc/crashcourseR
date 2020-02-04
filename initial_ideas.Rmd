@@ -21,6 +21,35 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
+# Overview course
+* **<span style="color:black">First week ()</span>**
+  + **Setting up** [R](https://www.freestatistics.org/cran/) and [RStudio](https://rstudio.com/products/rstudio/download/);
+  + **Basic objects** - vector, matrix, data frame, list, data types;
+  + **Simple calculations**;
+  + **Descriptives** - importing/exporting data, summarising;
+  + **Handling objects** - indexing.
+
+* **<span style="color:black">Second week ()</span>**
+  + **Wrangling** - tidyverse;
+  + **Functions** - loops, conditionals (if else, ifelse, while), function, apply family.
+
+* **<span style="color:black">Third week ()</span>**
+  + **Loading/saving data** - SPSS data (heaven/foreign package);
+  + **GLM** - .
+
+* **<span style="color:black">Fourth week ()</span>**
+  + **SEM** - lavaan and structural plotting;
+  + **Missing data** - multiple imputations.
+
+* **<span style="color:black">Fifth week ()</span>**
+  + **Basic plotting**;
+  + **Fancy plotting** - ggplot.
+
+* **<span style="color:black">Sixth week ()</span>**
+  + **RMarkdown** - handling citations, write a paper in R, open science;
+  + **Additional questions**
+
+
 ## First week (Lu)
 
 | • install R and RStudio

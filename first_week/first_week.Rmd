@@ -5,13 +5,15 @@ date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
   ioslides_presentation: default
   transition: '0.0'
+toolbar:
+  download: 'first_week/first_week.pdf'
 ---
 
 ## Welcome to the R Crash Course! PROVA
 
 <center>
 
-![](welcome.jpg){ width=70% height=70%}
+![](welcome.jpg){width=70% height=70%}
 
 </center>
 
@@ -75,9 +77,9 @@ An *object* can be considered as a specific configuration of data structure, a v
 A vector is a sequence of contiguous cells containing data, such as `c(1, 2, 3, 4)`. The function c stands for *concatenate*.
 
 ```{r eval = TRUE, results = "asis", collapse = TRUE, include = TRUE}
-c(1, 2, 3, 4) # integers
+c(1, 2, 3, 4) #integers
 
-c("PrincessLeia", "Yoda", "HanSolo") # characters
+c("PrincessLeia", "Yoda", "HanSolo") #characters
 ```
 
 **IMPORTANT**: every element of the vector has to be of the same type!
@@ -109,44 +111,123 @@ matrix(1:9, nrow = 3, ncol = 3)
 matrix(1:9, nrow = 3, ncol = 3)
 ```
 
-Matrices are 
+Matrices are collections of *numerical* vectors arranged into a fixed number of rows and columns.
 
-## new
-  + **Setting up** [R](https://www.freestatistics.org/cran/) and   [RStudio](https://rstudio.com/products/rstudio/download/);
-  + **Basic objects** - vector, matrix, data frame, list, data types;
-  + **Simple calculations**;
-  + **Descriptives** - importing/exporting data, summarising;
-  + **Handling objects** - indexing.
+## 2.3 Data frames
 
-## Overview course
+```{r eval = FALSE}
+data.frame(name = c("bojack", "todd", "mr", "diane"),
+           age = c(52, 30, 52, 41),
+           human = c(FALSE, TRUE, FALSE, TRUE))
+```
 
-* **<span style="color:black">Second week ()</span>**
-  + **Wrangling** - tidyverse;
-  + **Functions** - loops, conditionals (if else, ifelse, while), function, apply family.
+## 2.3 Data frames
 
-## Overview course
+```{r}
+data.frame(name = c("bojack", "todd", "mr", "diane"),
+           age = c(52, 30, 52, 41),
+           human = c(FALSE, TRUE, FALSE, TRUE))
+```
 
-* **<span style="color:black">Third week ()</span>**
-  + **Loading/saving data** - SPSS data (heaven/foreign package);
-  + **GLM** - .
+## 2.3 Data frames
 
-## Overview course
+```{r}
+data.frame(name = c("bojack", "todd", "mr", "diane"),
+           age = c(52, 30, 52, 41),
+           human = c(FALSE, TRUE, FALSE, TRUE))
+```
 
-* **<span style="color:black">Fourth week ()</span>**
-  + **SEM** - lavaan and structural plotting;
-  + **Missing data** - multiple imputations.
+Data frames are collections of *any type* of vectors (**every element in the vector has to be of the same type**) stacked by column.
 
-## Overview course
+## 2.4 Lists
 
-* **<span style="color:black">Fifth week ()</span>**
-  + **Basic plotting**;
-  + **Fancy plotting** - ggplot.
+A list is an object in which other objects are stored. It could be thought as a book indexing what are the books present in a library.
 
-## Overview course
+Any type of object can be stored into a list. As always, it is importnat that every element *within* each object is of the same type.
 
-* **<span style="color:black">Sixth week ()</span>**
-  + **RMarkdown** - handling citations, write a paper in R, open science;
-  + **Additional questions**
+## 2.4 Lists
+
+```{r}
+list(series = "BoJack Horseman",
+     seasons = c(1, 2, 3, 4, 5),
+     leads = data.frame(name = c("bojack", "todd", "mr", "diane"),
+                   age = c(52, 30, 52, 41),
+                   human = c(FALSE, TRUE, FALSE, TRUE)))
+```
+
+## 3 Data types
+
+So far, we have seen:
+
+* integers - `1, 2, 3, 4`
+* characters - `"bojack", "todd", "mr", "diane"`
+* logical - `TRUE, FALSE`
+
+## 3.1 Factors
+
+More types:
+
+* integers - `1, 2, 3, 4`
+* characters - `"bojack", "todd", "mr", "diane"`
+* logical - `TRUE, FALSE`
+
+* factor - `species`
+
+## 3.1 Factors
+
+```{r}
+species <- factor(c("Human", "Non-Human", "Non-Human", "Non-Human"), 
+                  levels = c("Human", "Non-Human"))
+```
+
+## 3.1 Factors
+
+```{r}
+species <- factor(c("Human", "Non-Human", "Non-Human", "Non-Human"), 
+                  levels = c("Human", "Non-Human"))
+```
+
+Under the hood, a factor is a vector of integers which identify the levels.
+
+```{r}
+as.numeric(species)
+```
+
+## 3.1 Factors
+
+```{r}
+species <- factor(c("Human", "Non-Human", "Non-Human", "Non-Human"), 
+                  levels = c("Human", "Non-Human"))
+```
+
+```{r}
+table(species)
+```
+
+## 3.1 Missing Values
+
+Even more types:
+
+* integers - `1, 2, 3, 4`
+* characters - `"bojack", "todd", "mr", "diane"`
+* logical - `TRUE, FALSE`
+* factor - `species`
+
+* missing values - `NA`
+
+## 3.1 Missing Values
+
+```{r}
+data.frame(name = c("bojack", "todd", "mr", "diane"),
+           age = c(52, NA, 52, 41),
+           human = c(FALSE, TRUE, FALSE, TRUE))
+```
+
+## Exercise session 1
+
+![](ex1.jpg){width=70% height=70%}
+
+
 
 
 
